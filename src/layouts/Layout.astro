@@ -30,14 +30,15 @@ const { title, description } = Astro.props;
             <div class="header-container">
                 <div class="logo">
                     <a href="/">
-                        <span class="logo-farm">小島農園</span>
+                        <span class="logo-farm">動物ふれあい広場</span>
                         <span class="logo-subtitle">ポニー＆ヤギ・ふれあい広場</span>
                     </a>
                 </div>
                 <nav class="nav-links">
-                    <a href="#about">農園の想い</a>
+                    <a href="#about">私たちの想い</a>
                     <a href="#service">ふれあいメニュー</a>
                     <a href="#info">営業案内</a>
+                    <a href="/reserve" class="nav-reserve-btn">📅 予約する</a>
                 </nav>
             </div>
         </header>
@@ -49,8 +50,9 @@ const { title, description } = Astro.props;
 
         <!-- Floating Reservation Button for Mobile -->
         <div class="floating-btn-container">
-            <a href="https://line.me/R/" target="_blank" rel="noopener noreferrer" class="btn-primary floating-btn">
-                <span>LINEで<br />予約する</span>
+            <a href="/reserve" class="floating-btn" aria-label="予約する">
+                <span class="floating-btn-icon">📅</span>
+                <span class="floating-btn-text">予約する</span>
             </a>
         </div>
 
@@ -58,18 +60,19 @@ const { title, description } = Astro.props;
         <footer class="footer">
             <div class="container footer-content">
                 <div class="footer-info">
-                    <h3 class="footer-logo">小島農園</h3>
+                    <h3 class="footer-logo">動物ふれあい広場</h3>
                     <p>ポニー＆ヤギ・ふれあい広場</p>
                     <p class="footer-note">※雨天時は中止となります。あらかじめご了承ください。</p>
                 </div>
                 <div class="footer-links">
-                    <a href="#about">農園の想い</a>
+                    <a href="#about">私たちの想い</a>
                     <a href="#service">ふれあいメニュー</a>
                     <a href="#info">営業案内</a>
+                    <a href="/reserve">予約する</a>
                 </div>
             </div>
             <div class="footer-bottom">
-                &copy; {new Date().getFullYear()} 小島農園 All rights reserved.
+                &copy; {new Date().getFullYear()} 動物ふれあい広場 All rights reserved.
             </div>
         </footer>
 	</body>
@@ -100,14 +103,14 @@ const { title, description } = Astro.props;
 }
 
 .logo-farm {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 700;
     color: var(--color-primary-dark);
     line-height: 1.2;
 }
 
 .logo-subtitle {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--color-secondary-dark);
     font-weight: 500;
 }
@@ -115,15 +118,34 @@ const { title, description } = Astro.props;
 .nav-links {
     display: flex;
     gap: var(--spacing-lg);
+    align-items: center;
 }
 
 .nav-links a {
     font-weight: 500;
     color: var(--color-text);
+    transition: color 0.2s ease;
 }
 
 .nav-links a:hover {
     color: var(--color-primary-dark);
+}
+
+.nav-reserve-btn {
+    background-color: var(--color-accent);
+    color: white !important;
+    padding: 0.5rem 1.2rem;
+    border-radius: var(--radius-full);
+    font-weight: 700 !important;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease, transform 0.2s ease !important;
+    box-shadow: 0 2px 8px rgba(229, 107, 85, 0.4);
+}
+
+.nav-reserve-btn:hover {
+    background-color: var(--color-accent-dark) !important;
+    color: white !important;
+    transform: translateY(-1px);
 }
 
 /* Floating Action Button (FAB) */
@@ -135,22 +157,44 @@ const { title, description } = Astro.props;
 }
 
 .floating-btn {
-    width: 90px;
-    height: 90px;
+    width: 82px;
+    height: 82px;
     border-radius: 50%;
     padding: 0;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 0.9rem;
+    font-size: 0.82rem;
     line-height: 1.2;
-    background-color: var(--color-secondary);
-    box-shadow: var(--shadow-lg);
+    background-color: var(--color-accent);
+    color: white;
+    font-weight: 700;
+    box-shadow: 0 4px 20px rgba(229, 107, 85, 0.6);
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    animation: float-pulse 2.5s ease-in-out infinite;
 }
 
 .floating-btn:hover {
-    background-color: var(--color-secondary-dark);
-    transform: scale(1.05);
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(229, 107, 85, 0.8);
+}
+
+.floating-btn-icon {
+    font-size: 1.4rem;
+    line-height: 1;
+    margin-bottom: 2px;
+}
+
+.floating-btn-text {
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+@keyframes float-pulse {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
 }
 
 /* Footer Styles */

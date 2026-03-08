@@ -1,0 +1,254 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// RESERVA の実際のURLに変更してください
+const RESERVA_URL = 'https://reserva.be/YOUR_ACCOUNT_ID'; // ← ここを変更
+---
+
+<Layout
+    title="ご予約の前に | 動物ふれあい広場"
+    description="動物ふれあい広場（ポニー＆ヤギ・ふれあい広場）のご予約前に確認いただきたい注意事項です。"
+>
+    <div class="reserve-page">
+        <div class="reserve-header">
+            <p class="reserve-header-sub">Step 1 / 2</p>
+            <h1>ご予約の前に</h1>
+            <p class="reserve-header-desc">以下の注意事項をご確認の上、予約カレンダーへお進みください。</p>
+        </div>
+
+        <div class="container reserve-container">
+
+            <!-- 注意事項カード -->
+            <div class="caution-list">
+
+                <div class="caution-card">
+                    <div class="caution-icon">☔</div>
+                    <div class="caution-body">
+                        <h3>雨天・荒天時は中止となります</h3>
+                        <p>雨天・悪天候の場合はやむを得ず中止とさせていただく場合がございます。当日の開催状況については予約システムまたはホームページをご確認ください。</p>
+                    </div>
+                </div>
+
+                <div class="caution-card">
+                    <div class="caution-icon">👟</div>
+                    <div class="caution-body">
+                        <h3>動きやすく汚れてもよい服装で</h3>
+                        <p>農園内は土や草の上を歩きます。サンダルは危険ですので、運動靴など足をしっかりと覆う靴でお越しください。</p>
+                    </div>
+                </div>
+
+                <div class="caution-card">
+                    <div class="caution-icon">👶</div>
+                    <div class="caution-body">
+                        <h3>ベビーカーでの入場OK！</h3>
+                        <p>小さなお子様連れのご家族も安心してお越しいただけます。ベビーカーでの入場が可能です。</p>
+                    </div>
+                </div>
+
+                <div class="caution-card">
+                    <div class="caution-icon">📍</div>
+                    <div class="caution-body">
+                        <h3>場所は予約完了後にご案内します</h3>
+                        <p>詳しいアクセス方法は、予約完了メールにてお知らせいたします。</p>
+                    </div>
+                </div>
+
+                <div class="caution-card">
+                    <div class="caution-icon">🔗</div>
+                    <div class="caution-body">
+                        <h3>外部サービスで予約を受け付けております</h3>
+                        <p>「次へ」を押すと予約管理サービス（RESERVA）のページへ移動します。安全な外部サービスですのでご安心ください。</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- CTAエリア -->
+            <div class="cta-area">
+                <p class="cta-agree-text">上記の内容を確認しました</p>
+                <a
+                    href={RESERVA_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn-primary btn-cta"
+                    id="reserva-link"
+                >
+                    📅 予約カレンダーで空き確認・予約する
+                    <span class="btn-arrow">→</span>
+                </a>
+                <p class="cta-note">外部サービス（RESERVA）へ移動します</p>
+                <a href="/" class="back-link">← トップページに戻る</a>
+            </div>
+
+        </div>
+    </div>
+</Layout>
+
+<style>
+.reserve-page {
+    min-height: 80vh;
+    background-color: var(--color-bg);
+}
+
+.reserve-header {
+    background: linear-gradient(135deg, var(--color-primary-light) 0%, #E8F5F2 100%);
+    padding: var(--spacing-2xl) var(--spacing-md);
+    text-align: center;
+    border-bottom: 3px solid var(--color-secondary);
+}
+
+.reserve-header-sub {
+    display: inline-block;
+    background-color: var(--color-secondary);
+    color: var(--color-primary-dark);
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 0.2rem 1rem;
+    border-radius: var(--radius-full);
+    margin-bottom: var(--spacing-sm);
+    letter-spacing: 0.05em;
+}
+
+.reserve-header h1 {
+    font-size: 2rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.reserve-header-desc {
+    color: var(--color-text-muted);
+    font-size: 1rem;
+}
+
+.reserve-container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: var(--spacing-2xl) var(--spacing-md);
+}
+
+/* 注意事項カード群 */
+.caution-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.caution-card {
+    display: flex;
+    gap: var(--spacing-lg);
+    align-items: flex-start;
+    background-color: var(--color-surface);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+    border-left: 4px solid var(--color-primary-light);
+    transition: box-shadow 0.2s ease;
+}
+
+.caution-card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.caution-icon {
+    font-size: 2rem;
+    line-height: 1;
+    flex-shrink: 0;
+    width: 44px;
+    text-align: center;
+}
+
+.caution-body h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-primary-dark);
+}
+
+.caution-body p {
+    font-size: 0.92rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* CTA Area */
+.cta-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    text-align: center;
+    padding-top: var(--spacing-lg);
+    border-top: 2px dashed var(--color-primary-light);
+}
+
+.cta-agree-text {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
+.btn-cta {
+    width: 100%;
+    max-width: 480px;
+    padding: 1.2rem var(--spacing-xl);
+    font-size: 1.1rem;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    box-shadow: 0 4px 20px rgba(229, 107, 85, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(229, 107, 85, 0.6);
+}
+
+.btn-arrow {
+    font-weight: 700;
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.btn-cta:hover .btn-arrow {
+    transform: translateX(4px);
+}
+
+.cta-note {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
+.back-link {
+    display: inline-block;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    margin-top: var(--spacing-sm);
+    transition: color 0.2s ease;
+}
+
+.back-link:hover {
+    color: var(--color-primary-dark);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .reserve-header h1 {
+        font-size: 1.6rem;
+    }
+
+    .btn-cta {
+        font-size: 1rem;
+        padding: 1rem var(--spacing-lg);
+    }
+
+    .caution-card {
+        padding: var(--spacing-md);
+        gap: var(--spacing-md);
+    }
+}
+</style>

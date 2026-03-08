@@ -13,8 +13,8 @@ try {
 ---
 
 <Layout 
-    title="小島農園 | ポニー＆ヤギ・ふれあい広場" 
-    description="ヤギさんとトコトコ。家族でのんびりお散歩時間。近所の家族連れや、子供の動物デビュー・食育にぴったりの、自然豊かでアットホームな小島農園です。"
+    title="動物ふれあい広場 | ポニー＆ヤギ・ふれあい広場" 
+    description="ヤギさんとトコトコ。家族でのんびりお散歩時間。近所の家族連れや、子供の動物デビュー・食育にぴったりの、自然豊かでアットホームな動物ふれあい広場です。"
 >
 	<!-- Hero Section -->
     <section class="hero">
@@ -38,27 +38,34 @@ try {
     <section id="about" class="section section-alt">
         <div class="container about-container">
             <div class="about-text">
-                <h2>小島農園の想い<br><span class="h2-sub">〜ヤギさんぽで家族の思い出を〜</span></h2>
+                <h2>私たちの想い<br><span class="h2-sub">〜ヤギさんぽで家族の思い出を〜</span></h2>
                 <div class="about-content">
                     <p>
-                        私たち小島農園は、小さなお子様連れのご家族に、自然や動物と触れ合う「癒やしと学び」の時間を提供したいという想いから、ポニー＆ヤギ・ふれあい広場をオープンしました。
+                        私たち動物ふれあい広場は、小さなお子様連れのご家族に、自然や動物と触れ合う「癒やしと学び」の時間を提供したいという想いから、ポニー＆ヤギ・ふれあい広場をオープンしました。
                     </p>
                     <p>
                         毎日忙しいパパ・ママも、のんびりと草をはむヤギの姿を見たり、新鮮な空気を吸いながら野菜畑を歩いたりすることで、心リフレッシュできるはずです。そしてそれは、子供たちにとってかけがえのない「農業体験」であり、「食育」の第一歩だと信じています。
                     </p>
                     <p>
                         ベビーカーのままでも気軽にお立ち寄りいただけるよう、ファミレスのように親しみやすく温かい空間を用意してお待ちしております。<br>
-                        お子様の「初めての動物ふれあい（動物デビュー）」は、ぜひ小島農園にお任せください！馬やヤギたちと一緒に、皆様の笑顔に出会えることを楽しみにしております。
+                        お子様の「初めての動物ふれあい（動物デビュー）」は、ぜひ動物ふれあい広場にお任せください！馬やヤギたちと一緒に、皆様の笑顔に出会えることを楽しみにしております。
                     </p>
                 </div>
             </div>
-            <!-- Temporary Image Placeholder with nice styling -->
+            <!-- Image Placeholder -->
             <div class="about-image-placeholder">
-                <div class="placeholder-icon">🐐 👨‍👩‍👧‍👦 🌿</div>
-                <span>アットホームな農園風景</span>
+                <div class="about-image-inner">
+                    <div class="about-animal-icons">
+                        <span class="about-animal">🐐</span>
+                        <span class="about-animal about-animal--right">🐴</span>
+                    </div>
+                    <div class="about-family-icon">👨‍👩‍👧‍👦</div>
+                    <p class="about-placeholder-text">ヤギ・ポニーと<br>家族の笑顔が集まる場所</p>
+                </div>
             </div>
         </div>
     </section>
+
 
     <!-- Services Section (ふれあいメニュー) -->
     <section id="service" class="section">
@@ -100,17 +107,27 @@ try {
             
             <!-- Notes -->
             <div class="service-notes">
-                <p>※ 【完全予約制】 ご予約・詳細はLINEからお願いします。</p>
+                <p>※ 「完全予約制」です。下のボタンから空き確認・ご予約をお願いします。</p>
                 <p>※ 雨天時は中止となります。あらかじめご了承ください。</p>
                 <p class="note-highlight">✨ ベビーカーOK、お子様動物デビュー大歓迎！ ✨</p>
+            </div>
+
+            <!-- Reservation CTA Button -->
+            <div class="reserve-cta">
+                <a href="/reserve" class="btn-primary btn-reserve-big">
+                    📅 空き状況を確認・ご予約はこちら
+                    <span class="btn-reserve-arrow">→</span>
+                </a>
+                <p class="reserve-cta-note">※雨天時は当日朝にお知らせします</p>
             </div>
         </div>
     </section>
 
     <!-- News / Blog Section (お知らせ) -->
-    <section id="news" class="section">
+    <section id="news" class="section section-alt">
         <div class="container text-center">
-            <h2>お知らせ・農園日記</h2>
+            <h2>お知らせ・日記</h2>
+            <p class="section-desc">動物たちの日常や最新情報をお届けします。</p>
             <div class="news-list">
                 {latestNews.length > 0 ? (
                     latestNews.map((news) => (
@@ -122,7 +139,10 @@ try {
                         </a>
                     ))
                 ) : (
-                    <p class="no-news">まだお知らせはありません。</p>
+                    <div class="no-news-box">
+                        <p class="no-news">📝 まだお知らせはありません。</p>
+                        <p class="no-news-sub">開場情報など、お業待ちください！</p>
+                    </div>
                 )}
             </div>
             {latestNews.length > 0 && (
@@ -132,20 +152,37 @@ try {
     </section>
 
     <!-- Info & Access Section (営業案内) -->
-    <section id="info" class="section section-alt">
+    <section id="info" class="section">
         <div class="container text-center">
             <h2>営業案内・アクセス</h2>
-            <div class="info-content">
-                <p><strong>場所：</strong> 小島農園 ポニー＆ヤギ・ふれあい広場<br>
-                <small>（※詳細はLINE予約時にお伝えいたします）</small></p>
-                <p><strong>営業時間：</strong> LINEにてお問い合わせください。</p>
-                <p><strong>駐車場：</strong> あり</p>
-                <div class="info-cta">
-                    <p>ご予約や詳しいご案内は公式LINEからどうぞ！</p>
-                    <a href="https://line.me/R/" target="_blank" rel="noopener noreferrer" class="btn-primary">
-                        LINEで予約・問い合わせ
-                    </a>
+            <p class="section-desc">完全予約制です。リンクからお気軽にご予約ください。</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="info-icon">📍</span>
+                    <strong>場所</strong>
+                    <p>動物ふれあい広場<br><small>（※予約完了後にご案内）</small></p>
                 </div>
+                <div class="info-item">
+                    <span class="info-icon">🅿️</span>
+                    <strong>駐車場</strong>
+                    <p>ご利用いただけます</p>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">👶</span>
+                    <strong>ベビーカー</strong>
+                    <p>OK！入場可能です</p>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">☔</span>
+                    <strong>雨天時</strong>
+                    <p>中止となります</p>
+                </div>
+            </div>
+            <div class="info-cta">
+                <p>ご予約は下ボタンからどうぞ！</p>
+                <a href="/reserve" class="btn-primary">
+                    📅 空き状況を確認・予約する
+                </a>
             </div>
         </div>
     </section>
@@ -247,27 +284,68 @@ try {
 }
 
 .about-image-placeholder {
-    background-color: var(--color-primary-light);
+    background: linear-gradient(135deg, var(--color-primary-light) 0%, #d4ead0 100%);
     border-radius: var(--radius-lg);
     aspect-ratio: 4/3;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     color: var(--color-primary-dark);
     font-weight: 700;
-    border: 4px dashed var(--color-primary);
+    border: 3px solid var(--color-primary);
     transform: rotate(2deg);
     transition: transform 0.3s ease;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
 }
 
 .about-image-placeholder:hover {
     transform: rotate(0deg);
 }
 
-.placeholder-icon {
-    font-size: 4rem;
+.about-image-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-xl);
+}
+
+.about-animal-icons {
+    display: flex;
+    gap: var(--spacing-xl);
+    font-size: 3rem;
     margin-bottom: var(--spacing-sm);
+}
+
+.about-animal {
+    display: inline-block;
+    animation: sway 3s ease-in-out infinite;
+}
+
+.about-animal--right {
+    animation-delay: 1.5s;
+    animation-direction: alternate-reverse;
+}
+
+@keyframes sway {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+}
+
+.about-family-icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-xs);
+}
+
+.about-placeholder-text {
+    font-size: 0.95rem;
+    color: var(--color-primary-dark);
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.6;
+    opacity: 0.85;
 }
 
 /* Services Section */
@@ -455,5 +533,127 @@ try {
 
 .btn-news-all:hover {
     color: var(--color-accent);
+}
+
+/* No-news state */
+.no-news-box {
+    padding: var(--spacing-2xl) 0;
+    color: var(--color-text-muted);
+}
+
+.no-news {
+    font-size: 1.15rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-xs);
+}
+
+.no-news-sub {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    opacity: 0.7;
+}
+
+/* Info Grid */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: var(--spacing-lg);
+    margin: var(--spacing-xl) 0 var(--spacing-2xl);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.info-item {
+    background-color: var(--color-surface);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xs);
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.info-item:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.info-icon {
+    font-size: 2rem;
+    margin-bottom: var(--spacing-xs);
+}
+
+.info-item strong {
+    color: var(--color-primary-dark);
+    font-size: 0.95rem;
+}
+
+.info-item p {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.info-cta {
+    margin-top: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.info-cta > p {
+    color: var(--color-text-muted);
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* Reserve CTA */
+.reserve-cta {
+    margin-top: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.btn-reserve-big {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 1.1rem var(--spacing-2xl);
+    font-size: 1.1rem;
+    border-radius: var(--radius-full);
+    box-shadow: 0 4px 20px rgba(229, 107, 85, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    max-width: 480px;
+    text-align: center;
+    justify-content: center;
+}
+
+.btn-reserve-big:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(229, 107, 85, 0.6);
+}
+
+.btn-reserve-arrow {
+    font-size: 1.2rem;
+    font-weight: 700;
+    transition: transform 0.3s ease;
+}
+
+.btn-reserve-big:hover .btn-reserve-arrow {
+    transform: translateX(4px);
+}
+
+.reserve-cta-note {
+    font-size: 0.82rem;
+    color: var(--color-text-muted);
+    margin: 0;
 }
 </style>
