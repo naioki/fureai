@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "@astrojs/check": "^0.9.6",
+    "astro": "^5.18.0",
+    "microcms-js-sdk": "^3.3.0",
+    "typescript": "^5.9.3"
+  },
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}

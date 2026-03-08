@@ -1,0 +1,459 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getNewsList } from '../lib/microcms';
+
+// Fetch the latest 3 news posts from MicroCMS
+let latestNews = [];
+try {
+    const response = await getNewsList({ limit: 3 });
+    latestNews = response.contents;
+} catch (error) {
+    console.error("Error fetching news from MicroCMS:", error);
+}
+---
+
+<Layout 
+    title="小島農園 | ポニー＆ヤギ・ふれあい広場" 
+    description="ヤギさんとトコトコ。家族でのんびりお散歩時間。近所の家族連れや、子供の動物デビュー・食育にぴったりの、自然豊かでアットホームな小島農園です。"
+>
+	<!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1 class="hero-title">
+                <span class="highlight">ヤギさん</span>とトコトコ。<br>
+                家族でのんびりお散歩時間。
+            </h1>
+            <p class="hero-subtitle">
+                ポニー＆ヤギ・ふれあい広場<br>
+                お子様の動物デビュー大歓迎！ベビーカーOK！
+            </p>
+            <div class="hero-cta">
+                <a href="#service" class="btn-primary hero-btn">ふれあいメニューを見る</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section (プロフィール・想い) -->
+    <section id="about" class="section section-alt">
+        <div class="container about-container">
+            <div class="about-text">
+                <h2>小島農園の想い<br><span class="h2-sub">〜ヤギさんぽで家族の思い出を〜</span></h2>
+                <div class="about-content">
+                    <p>
+                        私たち小島農園は、小さなお子様連れのご家族に、自然や動物と触れ合う「癒やしと学び」の時間を提供したいという想いから、ポニー＆ヤギ・ふれあい広場をオープンしました。
+                    </p>
+                    <p>
+                        毎日忙しいパパ・ママも、のんびりと草をはむヤギの姿を見たり、新鮮な空気を吸いながら野菜畑を歩いたりすることで、心リフレッシュできるはずです。そしてそれは、子供たちにとってかけがえのない「農業体験」であり、「食育」の第一歩だと信じています。
+                    </p>
+                    <p>
+                        ベビーカーのままでも気軽にお立ち寄りいただけるよう、ファミレスのように親しみやすく温かい空間を用意してお待ちしております。<br>
+                        お子様の「初めての動物ふれあい（動物デビュー）」は、ぜひ小島農園にお任せください！馬やヤギたちと一緒に、皆様の笑顔に出会えることを楽しみにしております。
+                    </p>
+                </div>
+            </div>
+            <!-- Temporary Image Placeholder with nice styling -->
+            <div class="about-image-placeholder">
+                <div class="placeholder-icon">🐐 👨‍👩‍👧‍👦 🌿</div>
+                <span>アットホームな農園風景</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section (ふれあいメニュー) -->
+    <section id="service" class="section">
+        <div class="container text-center">
+            <h2>ふれあいメニュー</h2>
+            <p class="section-desc">動物たちと一緒に楽しい時間を過ごしましょう。</p>
+            
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <div class="service-icon-wrapper">
+                        <span class="service-icon">🐐</span>
+                    </div>
+                    <h3 class="service-title">ヤギさんぽ <small>(15分)</small></h3>
+                    <p class="service-price">500円</p>
+                    <p class="service-detail">ヤギさんと一緒に畑の周りをお散歩。のんびりとしたペースで、お子様も安心です。</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <div class="service-icon-wrapper">
+                        <span class="service-icon">🥕</span>
+                    </div>
+                    <h3 class="service-title">エサやり体験 <small>(にんじん1カップ)</small></h3>
+                    <p class="service-price">500円</p>
+                    <p class="service-detail">ヤギさんやポニーさんたちの大好物！手から直接あげるドキドキ体験をどうぞ。</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card service-coming-soon">
+                    <div class="service-icon-wrapper">
+                        <span class="service-icon">🐴</span>
+                    </div>
+                    <h3 class="service-title">ポニー引き馬 <small>(準備中)</small></h3>
+                    <p class="service-price">-</p>
+                    <p class="service-detail">現在準備中です。ポニーの背中に乗って景色を楽しむ体験を、どうぞお楽しみに！</p>
+                </div>
+            </div>
+            
+            <!-- Notes -->
+            <div class="service-notes">
+                <p>※ 【完全予約制】 ご予約・詳細はLINEからお願いします。</p>
+                <p>※ 雨天時は中止となります。あらかじめご了承ください。</p>
+                <p class="note-highlight">✨ ベビーカーOK、お子様動物デビュー大歓迎！ ✨</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- News / Blog Section (お知らせ) -->
+    <section id="news" class="section">
+        <div class="container text-center">
+            <h2>お知らせ・農園日記</h2>
+            <div class="news-list">
+                {latestNews.length > 0 ? (
+                    latestNews.map((news) => (
+                        <a href={`/news/${news.id}`} class="news-card">
+                            <div class="news-date">
+                                {new Date(news.publishedAt || news.createdAt).toLocaleDateString("ja-JP")}
+                            </div>
+                            <h3 class="news-title">{news.title}</h3>
+                        </a>
+                    ))
+                ) : (
+                    <p class="no-news">まだお知らせはありません。</p>
+                )}
+            </div>
+            {latestNews.length > 0 && (
+                 <a href="/news" class="btn-news-all">お知らせをもっと見る</a>
+            )}
+        </div>
+    </section>
+
+    <!-- Info & Access Section (営業案内) -->
+    <section id="info" class="section section-alt">
+        <div class="container text-center">
+            <h2>営業案内・アクセス</h2>
+            <div class="info-content">
+                <p><strong>場所：</strong> 小島農園 ポニー＆ヤギ・ふれあい広場<br>
+                <small>（※詳細はLINE予約時にお伝えいたします）</small></p>
+                <p><strong>営業時間：</strong> LINEにてお問い合わせください。</p>
+                <p><strong>駐車場：</strong> あり</p>
+                <div class="info-cta">
+                    <p>ご予約や詳しいご案内は公式LINEからどうぞ！</p>
+                    <a href="https://line.me/R/" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                        LINEで予約・問い合わせ
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</Layout>
+
+<style>
+/* Hero Section */
+.hero {
+    position: relative;
+    /* Placeholder background color if no image */
+    background-color: var(--color-primary-light);
+    /* Soft gradient to represent outdoor feel */
+    background: linear-gradient(to bottom, #A1C4BB, #E7D7C1);
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Texture Pattern overlay */
+.hero-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    opacity: 0.4;
+    background-image: radial-gradient(var(--color-surface) 1px, transparent 1px);
+    background-size: 20px 20px;
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.85); /* Frosty glass effect */
+    padding: var(--spacing-2xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    max-width: 800px;
+    backdrop-filter: blur(5px);
+}
+
+.hero-title {
+    font-size: 3rem;
+    color: var(--color-primary-dark);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.3;
+}
+
+.highlight {
+    color: var(--color-accent);
+    position: relative;
+    display: inline-block;
+}
+/* Wavy underline effect on highlight */
+.highlight::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg"><path d="M0 10 Q25 20 50 10 T100 10" fill="none" stroke="%23E56B55" stroke-width="6" stroke-linecap="round"/></svg>');
+    background-size: 50% 100%;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xl);
+}
+
+.hero-btn {
+    font-size: 1.2rem;
+    padding: 1rem 3rem;
+}
+
+/* About Section */
+.about-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-2xl);
+    align-items: center;
+}
+
+.h2-sub {
+    font-size: 1.2rem;
+    color: var(--color-secondary-dark);
+    display: block;
+    margin-top: 0.5rem;
+    font-weight: 500;
+}
+
+.about-content {
+    font-size: 1.05rem;
+    line-height: 1.9;
+}
+
+.about-image-placeholder {
+    background-color: var(--color-primary-light);
+    border-radius: var(--radius-lg);
+    aspect-ratio: 4/3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary-dark);
+    font-weight: 700;
+    border: 4px dashed var(--color-primary);
+    transform: rotate(2deg);
+    transition: transform 0.3s ease;
+}
+
+.about-image-placeholder:hover {
+    transform: rotate(0deg);
+}
+
+.placeholder-icon {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+/* Services Section */
+.text-center {
+    text-align: center;
+}
+
+.section-desc {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+}
+
+.service-card {
+    background-color: var(--color-surface);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: 6px solid var(--color-secondary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.service-coming-soon {
+    opacity: 0.7;
+    border-top-color: #CBD5E1; /* Grayout */
+}
+
+.service-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    background-color: var(--color-surface-tint);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.service-icon {
+    font-size: 2.5rem;
+}
+
+.service-title {
+    font-size: 1.4rem;
+    margin-bottom: var(--spacing-xs);
+}
+
+.service-title small {
+    font-size: 0.9rem;
+    font-weight: normal;
+    color: var(--color-text-muted);
+}
+
+.service-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-md);
+}
+
+.service-detail {
+    font-size: 0.95rem;
+    color: var(--color-text);
+}
+
+.service-notes {
+    background-color: var(--color-surface-tint);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    display: inline-block;
+    text-align: left;
+    margin-top: var(--spacing-lg);
+}
+
+.service-notes p {
+    margin-bottom: var(--spacing-xs);
+    font-weight: 500;
+}
+
+.note-highlight {
+    color: var(--color-accent-dark);
+    font-weight: 700 !important;
+    text-align: center;
+    margin-top: var(--spacing-md);
+    margin-bottom: 0 !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    .hero-content {
+        padding: var(--spacing-lg) var(--spacing-md);
+        margin: 0 var(--spacing-md);
+    }
+    .about-container {
+        grid-template-columns: 1fr;
+    }
+    .about-image-placeholder {
+        order: -1; /* Move image to top on mobile */
+        transform: rotate(0);
+        margin-bottom: var(--spacing-lg);
+    }
+}
+
+/* News Section */
+.news-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    max-width: 800px;
+    margin: 0 auto var(--spacing-xl);
+}
+
+.news-card {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: var(--spacing-lg) var(--spacing-xl);
+    background-color: var(--color-surface);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    text-align: left;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-left: 4px solid transparent;
+}
+
+.news-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-left-color: var(--color-secondary);
+}
+
+.news-date {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin-right: var(--spacing-lg);
+    min-width: 100px;
+    font-weight: 500;
+}
+
+.news-title {
+    margin: 0;
+    font-size: 1.1rem;
+    flex-grow: 1;
+    color: var(--color-text);
+}
+
+.news-card:hover .news-title {
+    color: var(--color-primary-dark);
+}
+
+.no-news {
+    color: var(--color-text-muted);
+    padding: var(--spacing-xl) 0;
+}
+
+.btn-news-all {
+    display: inline-block;
+    color: var(--color-primary-dark);
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: var(--color-primary-light);
+    text-decoration-thickness: 3px;
+    text-underline-offset: 4px;
+    margin-top: var(--spacing-sm);
+}
+
+.btn-news-all:hover {
+    color: var(--color-accent);
+}
+</style>

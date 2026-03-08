@@ -1,0 +1,218 @@
+---
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+    description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+
+        <!-- Google Fonts: Zen Maru Gothic -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+	</head>
+	<body>
+        <!-- Header -->
+        <header class="header">
+            <div class="header-container">
+                <div class="logo">
+                    <a href="/">
+                        <span class="logo-farm">小島農園</span>
+                        <span class="logo-subtitle">ポニー＆ヤギ・ふれあい広場</span>
+                    </a>
+                </div>
+                <nav class="nav-links">
+                    <a href="#about">農園の想い</a>
+                    <a href="#service">ふれあいメニュー</a>
+                    <a href="#info">営業案内</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content (Slot) -->
+        <main>
+		    <slot />
+        </main>
+
+        <!-- Floating Reservation Button for Mobile -->
+        <div class="floating-btn-container">
+            <a href="https://line.me/R/" target="_blank" rel="noopener noreferrer" class="btn-primary floating-btn">
+                <span>LINEで<br />予約する</span>
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container footer-content">
+                <div class="footer-info">
+                    <h3 class="footer-logo">小島農園</h3>
+                    <p>ポニー＆ヤギ・ふれあい広場</p>
+                    <p class="footer-note">※雨天時は中止となります。あらかじめご了承ください。</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#about">農園の想い</a>
+                    <a href="#service">ふれあいメニュー</a>
+                    <a href="#info">営業案内</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; {new Date().getFullYear()} 小島農園 All rights reserved.
+            </div>
+        </footer>
+	</body>
+</html>
+
+<style>
+/* Header Styles */
+.header {
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-sm) var(--spacing-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo a {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-farm {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary-dark);
+    line-height: 1.2;
+}
+
+.logo-subtitle {
+    font-size: 0.8rem;
+    color: var(--color-secondary-dark);
+    font-weight: 500;
+}
+
+.nav-links {
+    display: flex;
+    gap: var(--spacing-lg);
+}
+
+.nav-links a {
+    font-weight: 500;
+    color: var(--color-text);
+}
+
+.nav-links a:hover {
+    color: var(--color-primary-dark);
+}
+
+/* Floating Action Button (FAB) */
+.floating-btn-container {
+    position: fixed;
+    bottom: var(--spacing-xl);
+    right: var(--spacing-xl);
+    z-index: 99;
+}
+
+.floating-btn {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    line-height: 1.2;
+    background-color: var(--color-secondary);
+    box-shadow: var(--shadow-lg);
+}
+
+.floating-btn:hover {
+    background-color: var(--color-secondary-dark);
+    transform: scale(1.05);
+}
+
+/* Footer Styles */
+.footer {
+    background-color: var(--color-primary-dark);
+    color: var(--color-surface-tint);
+    padding: var(--spacing-2xl) 0 var(--spacing-md);
+    margin-top: auto;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+}
+
+.footer-logo {
+    color: white;
+    font-size: 1.8rem;
+    margin-bottom: 0;
+}
+
+.footer-note {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin-top: var(--spacing-sm);
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+.footer-bottom {
+    text-align: center;
+    font-size: 0.8rem;
+    opacity: 0.7;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* Hide standard nav on mobile for simplicity */
+    }
+    
+    .floating-btn-container {
+        bottom: var(--spacing-md);
+        right: var(--spacing-md);
+    }
+    
+    .footer-content {
+        flex-direction: column;
+    }
+}
+</style>

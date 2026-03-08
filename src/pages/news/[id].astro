@@ -1,0 +1,150 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getNewsList, getNewsDetail } from '../../lib/microcms';
+
+export async function getStaticPaths() {
+    const response = await getNewsList({ limit: 100 });
+    return response.contents.map((news) => ({
+        params: { id: news.id },
+        props: { news },
+    }));
+}
+
+const { news } = Astro.props;
+---
+
+<Layout 
+    title={`${news.title} | お知らせ | 小島農園`} 
+    description={`小島農園からのお知らせ: ${news.title}`}
+>
+    <!-- Header Area for the Post -->
+    <div class="news-header">
+        <div class="container text-center">
+            <div class="news-meta">
+                <span class="news-date">
+                    {new Date(news.publishedAt || news.createdAt).toLocaleDateString("ja-JP")}
+                </span>
+            </div>
+            <h1 class="news-title">{news.title}</h1>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <section class="section news-content-section">
+        <div class="container news-container">
+            <!-- Article Body -->
+            <article class="news-body" set:html={news.content} />
+            
+            <div class="news-footer">
+                <a href="/news" class="btn-primary btn-outline">← お知らせ一覧に戻る</a>
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<style>
+/* Specific Styles for the News Detail Page */
+.news-header {
+    background-color: var(--color-surface-tint);
+    padding: var(--spacing-2xl) 0 var(--spacing-xl);
+    border-bottom: 3px solid var(--color-secondary);
+}
+
+.news-meta {
+    margin-bottom: var(--spacing-md);
+}
+
+.news-date {
+    display: inline-block;
+    background-color: var(--color-primary-light);
+    color: var(--color-primary-dark);
+    padding: 0.3rem 1rem;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+.news-title {
+    font-size: 2.2rem;
+    margin: 0;
+    color: var(--color-text);
+}
+
+.news-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.news-body {
+    background-color: var(--color-surface);
+    padding: var(--spacing-2xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    line-height: 2;
+    font-size: 1.05rem;
+    color: var(--color-text);
+}
+
+/* MicroCMS Rich Text Default Styles Handling */
+.news-body :global(h2) {
+    font-size: 1.6rem;
+    color: var(--color-primary-dark);
+    border-bottom: 2px solid var(--color-primary-light);
+    padding-bottom: 0.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.news-body :global(h3) {
+    font-size: 1.3rem;
+    color: var(--color-secondary-dark);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.news-body :global(p) {
+    margin-bottom: 1.5rem;
+}
+
+.news-body :global(ul) {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.news-body :global(li) {
+    margin-bottom: 0.5rem;
+}
+
+.news-body :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-sm);
+    margin: 1.5rem 0;
+}
+
+.news-footer {
+    margin-top: var(--spacing-2xl);
+    text-align: center;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--color-primary-dark);
+    border: 2px solid var(--color-primary-dark);
+    box-shadow: none;
+}
+
+.btn-outline:hover {
+    background-color: var(--color-primary-dark);
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .news-title {
+        font-size: 1.7rem;
+    }
+    .news-body {
+        padding: var(--spacing-lg) var(--spacing-md);
+    }
+}
+</style>
